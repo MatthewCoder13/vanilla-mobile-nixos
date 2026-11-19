@@ -882,7 +882,6 @@ kernel.override {
     ARCH_NPCM = no;
     SERIAL_BCM63XX = no;
     PINCTRL_SC8280XP = no;
-    SC_GCC_8280XP = no;
     BCM_SBA_RAID = no;
     DMA_ENGINE_RAID = no;
     SENSORS_GPIO_FAN = no;
