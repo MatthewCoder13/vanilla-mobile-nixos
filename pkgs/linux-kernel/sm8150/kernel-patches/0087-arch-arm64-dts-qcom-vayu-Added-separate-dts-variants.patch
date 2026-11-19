@@ -1,0 +1,136 @@
+From 69e5fe16faed69301c4c40760dcf501106043045 Mon Sep 17 00:00:00 2001
+From: Ali Nasrullayev <nesrullayev.ali@gmail.com>
+Date: Fri, 24 Apr 2026 13:57:57 +0400
+Subject: [PATCH 87/97] arch: arm64: dts: qcom: vayu: Added separate dts
+ variants for different panel types
+
+---
+ arch/arm64/boot/dts/qcom/Makefile             |  3 ++-
+ ...ayu.dts => sm8150-xiaomi-vayu-common.dtsi} |  7 -----
+ .../dts/qcom/sm8150-xiaomi-vayu-huaxing.dts   | 27 +++++++++++++++++++
+ .../dts/qcom/sm8150-xiaomi-vayu-tianma.dts    | 27 +++++++++++++++++++
+ 4 files changed, 56 insertions(+), 8 deletions(-)
+ rename arch/arm64/boot/dts/qcom/{sm8150-xiaomi-vayu.dts => sm8150-xiaomi-vayu-common.dtsi} (99%)
+ create mode 100644 arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-huaxing.dts
+ create mode 100644 arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-tianma.dts
+
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index 1bfcf4b258..2121fd8484 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -310,7 +310,8 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-sony-xperia-kumano-bahamut.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-sony-xperia-kumano-griffin.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-xiaomi-cepheus.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-xiaomi-nabu.dtb
+-dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-xiaomi-vayu.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-xiaomi-vayu-tianma.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-xiaomi-vayu-huaxing.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8250-hdk.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-oneplus-guacamole.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-oneplus-hotdogb.dtb
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu.dts b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+similarity index 99%
+rename from arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu.dts
+rename to arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+index c13e8aad90..c3cab3b5b5 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu.dts
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+@@ -38,8 +38,6 @@
+ /delete-node/ &cdsp_mem;    /* same size, shifted higher */
+ 
+ / {
+-	model = "Xiaomi POCO X3 Pro";
+-	compatible = "xiaomi,vayu", "qcom,sm8150";
+ 	qcom,msm-id = <QCOM_ID_SM8150 0x20000>; /* SM8150 v2 */
+ 	qcom,board-id = <47 0>;
+ 	chassis-type = "handset";
+@@ -476,8 +474,6 @@ touchscreen@0 {
+ 		
+ 		novatek,swrst-n8-addr = <0x3f0fe>;
+ 		novatek,spi-rd-fast-addr = <0x3f310>;
+-
+-		novatek,fw-name = "novatek/j20s_novatek_ts_fw01.bin";
+ 	};
+ };
+ 
+@@ -487,9 +483,6 @@ &mdss_dsi0 {
+ 	
+ 	display_panel:	panel@0 {
+ 		reg = <0>;
+-
+-		compatible = "tianma,nt36672";
+-		status = "okay";
+ 		
+ 		backlight = <&pm8150l_wled>;
+ 		reset-gpios = <&tlmm 6 GPIO_ACTIVE_LOW>;
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-huaxing.dts b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-huaxing.dts
+new file mode 100644
+index 0000000000..52ff539afd
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-huaxing.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Device Tree Source for Xiaomi POCO X3 Pro (vayu)
++ *
++ * Copyright (c) 2022, Degdag Mohamed <degdagmohamed@gmail.com>
++ * Copyright (c) 2023, Arseniy Velikanov <adomerlee@gmail.com>
++ * Copyright (c) 2026, Ali Nasrullayev <nesrullayev.ali@gmail.com>
++ */
++
++/dts-v1/;
++
++#include "sm8150-xiaomi-vayu-common.dtsi"
++
++/ {
++	model = "Xiaomi POCO X3 Pro";
++	compatible = "xiaomi,vayu", "qcom,sm8150";
++	
++};
++
++&display_panel {
++	compatible = "huaxing,nt36672";
++	status = "okay";
++};
++
++&touchscreen {
++	novatek,fw-name = "novatek/j20s_novatek_ts_fw02.bin";
++};
+\ No newline at end of file
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-tianma.dts b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-tianma.dts
+new file mode 100644
+index 0000000000..9f40cac920
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-tianma.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Device Tree Source for Xiaomi POCO X3 Pro (vayu)
++ *
++ * Copyright (c) 2022, Degdag Mohamed <degdagmohamed@gmail.com>
++ * Copyright (c) 2023, Arseniy Velikanov <adomerlee@gmail.com>
++ * Copyright (c) 2026, Ali Nasrullayev <nesrullayev.ali@gmail.com>
++ */
++
++/dts-v1/;
++
++#include "sm8150-xiaomi-vayu-common.dtsi"
++
++/ {
++	model = "Xiaomi POCO X3 Pro";
++	compatible = "xiaomi,vayu", "qcom,sm8150";
++	
++};
++
++&display_panel {
++	compatible = "tianma,nt36672";
++	status = "okay";
++};
++
++&touchscreen {
++	novatek,fw-name = "novatek/j20s_novatek_ts_fw01.bin";
++};
+\ No newline at end of file
+-- 
+2.56.0
+

@@ -1,0 +1,80 @@
+From c566162ca889405c3c04d2fab2e35d0209567e46 Mon Sep 17 00:00:00 2001
+From: Elmo Todurov <elmo_git@todurov.eu>
+Date: Wed, 27 May 2026 06:49:07 +0000
+Subject: [PATCH 96/97] arm64: dts: qcom: sm8150-xiaomi-vayu: tune battery data
+
+Replace the rounded placeholder battery values with figures from
+the Xiaomi downstream battery profile, and add the two properties
+the simple-battery binding lets us populate but were previously
+omitted:
+
+  charge-full-design-microamp-hours: 5150 -> 5160 mAh
+  constant-charge-current-max-microamp:    (new) 2 A
+  energy-full-design-microwatt-hours:      (new) 19.866 Wh
+
+Capacity (5160 mAh) is taken from Xiaomi's vayu battery profile
+DTSI: qcom,nom-batt-capacity-mah = <5160>.
+
+energy-full-design (19 866 000 uWh) is computed as
+5160 mAh x 3.85 V (standard Li-ion nominal); downstream's battery
+profile does not state a separate nominal voltage.
+
+constant-charge-current-max-microamp is set to a conservative 2 A.
+Downstream advertises qcom,fastchg-current-ma = <5900> (5.9 A), but
+that ceiling is gated by Xiaomi-specific battery authentication,
+thermal throttling and charge-pump sequencing that mainline does
+not implement. 2 A is well within what PM8150B can deliver safely
+without any of that policy.
+
+voltage-max-design-microvolt is left at 4.4 V rather than the
+downstream 4.475 V to limit cell heating; the extra 75 mV
+downstream is paired with thermal management not yet present in
+mainline. The downstream value is recorded as a comment for
+future reference.
+
+Source:
+https://github.com/MiCode/Xiaomi_Kernel_OpenSource (vayu-r-oss)
+  arch/arm64/boot/dts/qcom/fg-gen4-batterydata-vayu-NVT-5160mah.dtsi
+  arch/arm64/boot/dts/qcom/fg-gen4-batterydata-vayu-sunwoda-5160mah.dtsi
+
+Signed-off-by: Elmo Todurov <elmo_git@todurov.eu>
+---
+ .../dts/qcom/sm8150-xiaomi-vayu-common.dtsi   | 21 ++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+index ee0f877a6e..d6ad8ac715 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+@@ -53,8 +53,27 @@ aliases {
+ 
+ 	battery: battery {
+ 		compatible = "simple-battery";
+-		charge-full-design-microamp-hours = <5150000>;
++		charge-full-design-microamp-hours = <5160000>;
++		/*
++		 * Energy = 5160 mAh * 3.85 V (standard Li-ion nominal);
++		 * downstream profile does not state a nominal voltage.
++		 */
++		energy-full-design-microwatt-hours = <19866000>;
++		/*
++		 * Downstream advertises qcom,fastchg-current-ma = <5900>,
++		 * but that ceiling is gated by Xiaomi-specific battery
++		 * authentication, thermal throttling and charge-pump
++		 * sequencing not implemented in mainline. 2 A is well
++		 * within what PM8150B can deliver safely without that.
++		 */
++		constant-charge-current-max-microamp = <2000000>;
+ 		voltage-min-design-microvolt = <3400000>;
++		/*
++		 * Downstream qcom,max-voltage-uv = <4475000> (4.475 V).
++		 * Held at 4.4 V here to limit cell heating; the extra
++		 * 75 mV downstream is paired with thermal management
++		 * that mainline does not yet have.
++		 */
+ 		voltage-max-design-microvolt = <4400000>;
+ 	};
+ 
+-- 
+2.56.0
+

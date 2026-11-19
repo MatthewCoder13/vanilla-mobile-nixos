@@ -1,0 +1,68 @@
+From 974642d688b31789eb71c9cf0815591212704420 Mon Sep 17 00:00:00 2001
+From: Ali Nasrullayev <nesrullayev.ali@gmail.com>
+Date: Mon, 4 May 2026 11:37:29 +0400
+Subject: [PATCH 88/97] arch: arm64: dts: qcom: vayu:
+
+- Added label to touchscreen node
+- Enable USB OTG
+---
+ .../dts/qcom/sm8150-xiaomi-vayu-common.dtsi    | 18 +++++++-----------
+ 1 file changed, 7 insertions(+), 11 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+index c3cab3b5b5..ac7092ed19 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+@@ -463,7 +463,7 @@ &spi17 {
+ 	status = "okay";
+ 	pinctrl-0 = <&qup_spi17_default>;
+ 
+-	touchscreen@0 {
++	touchscreen: touchscreen@0 {
+ 		compatible = "novatek,nt36672-spi";
+ 		reg = <0>;
+ 
+@@ -902,21 +902,23 @@ &ufs_mem_phy {
+ };
+ 
+ &usb_1 {
++	qcom,select-utmi-as-pipe-clk;
+ 	status = "okay";
+ };
+ 
+ &usb_1_dwc3 {
+-	snps,has-lpm-erratum;
+-	snps,hird-threshold = /bits/ 8 <0x10>;
++	dr_mode = "otg";
++	usb-role-switch;
+ 	maximum-speed = "high-speed";
+-	dr_mode = "peripheral";
++	/* Remove USB3 phy */
++	phys = <&usb_1_hsphy>;
++	phy-names = "usb2-phy";
+ };
+ 
+ &usb_1_dwc3_hs {
+ 	remote-endpoint = <&pm8150b_hs_in>;
+ };
+ 
+-
+ &usb_1_hsphy {
+ 	status = "okay";
+ 	vdda-pll-supply = <&vreg_l5a_0p875>;
+@@ -924,12 +926,6 @@ &usb_1_hsphy {
+ 	vdda33-supply = <&vreg_l2a_3p1>;
+ };
+ 
+-&usb_1_qmpphy {
+-	status = "okay";
+-	vdda-phy-supply = <&vreg_l3c_1p2>;
+-	vdda-pll-supply = <&vreg_l5a_0p875>;
+-};
+-
+ &wifi {
+ 	status = "okay";
+ 
+-- 
+2.56.0
+

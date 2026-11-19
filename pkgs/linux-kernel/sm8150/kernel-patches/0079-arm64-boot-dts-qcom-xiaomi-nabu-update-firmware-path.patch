@@ -1,0 +1,47 @@
+From f3bfd6dc7ef68f5ec2a52621215621f8806c9537 Mon Sep 17 00:00:00 2001
+From: Pan Ortiz <panjeoc@proton.me>
+Date: Sun, 19 Apr 2026 11:52:08 -0500
+Subject: [PATCH 79/97] arm64: boot: dts: qcom: xiaomi-nabu: update firmware
+ paths
+
+---
+ arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
+index b7845863ea..e30c8b406b 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
+@@ -461,7 +461,7 @@ &gpu {
+ 
+ 	zap-shader {
+ 		memory-region = <&gpu_mem>;
+-		firmware-name = "qcom/sm8150/xiaomi/nabu/a640_zap.mbn";
++		firmware-name = "qcom/sm8150/Xiaomi/nabu/a640_zap.mbn";
+ 	};
+ };
+ 
+@@ -773,17 +773,17 @@ &qupv3_id_2 {
+ 
+ &remoteproc_adsp {
+ 	status = "okay";
+-	firmware-name = "qcom/sm8150/xiaomi/nabu/adsp.mbn";
++	firmware-name = "qcom/sm8150/Xiaomi/nabu/adsp.mbn";
+ };
+ 
+ &remoteproc_cdsp {
+ 	status = "okay";
+-	firmware-name = "qcom/sm8150/xiaomi/nabu/cdsp.mbn";
++	firmware-name = "qcom/sm8150/Xiaomi/nabu/cdsp.mbn";
+ };
+ 
+ &remoteproc_mpss {
+ 	status = "okay";
+-	firmware-name = "qcom/sm8150/xiaomi/nabu/modem.mbn";
++	firmware-name = "qcom/sm8150/Xiaomi/nabu/modem.mbn";
+ };
+ 
+ &sound {
+-- 
+2.56.0
+

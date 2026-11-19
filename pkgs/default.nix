@@ -13,9 +13,11 @@ in
 
   # Firmware
   xiaomi-beryllium-firmware = callPackage ./xiaomi-beryllium-firmware { };
+  xiaomi-vayu-firmware = callPackage ./xiaomi-vayu-firmware { };
   oneplus-sdm845-firmware = callPackage ./oneplus-sdm845-firmware { };
 
   alsa-ucm-conf-sdm845 = callPackage ./alsa-ucm-conf-sdm845 { };
+  alsa-ucm-conf-sm8150 = callPackage ./alsa-ucm-conf-sm8150 { };
 
   unudhcpd = callPackage ./unudhcpd { };
   hexagonrpc = callPackage ./hexagonrpc { inherit (pkgs) hexagonrpc; };

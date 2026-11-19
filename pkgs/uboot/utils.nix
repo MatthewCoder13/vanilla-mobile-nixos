@@ -12,6 +12,7 @@
       pname,
       dtb,
       defconfig,
+      extraPatches ? [ ],
     }:
     (buildUBoot {
       pname = "uboot-tauchgang-${pname}";
@@ -24,6 +25,8 @@
         rev = "1f56592576887ffcae0e7d44c66b5cf030674908";
         hash = "sha256-A6AombRRnUaHkn7Fn7p6tkAEYnA+Z4vaJliRVB0hKuo=";
       };
+
+      inherit extraPatches;
 
       defconfig = "${defconfig} tauchgang.config";
       extraConfig = ''

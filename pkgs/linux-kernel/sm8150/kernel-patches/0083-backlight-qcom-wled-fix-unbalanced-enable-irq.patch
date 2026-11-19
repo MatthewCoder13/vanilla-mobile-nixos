@@ -1,0 +1,59 @@
+From 60160ed498ece5c602a3e8bc6306a26eff67ffb9 Mon Sep 17 00:00:00 2001
+From: Ali Nasrullayev <nesrullayev.ali@gmail.com>
+Date: Sat, 4 Apr 2026 00:20:16 +0400
+Subject: [PATCH 83/97] backlight: qcom-wled: fix unbalanced enable irq
+
+In Xiaomi POCO X3 Pro this issue also happens and the fix is
+based on: https://gitlab.com/sdm845-mainline/linux/-/commit/a85e3c5944f2e3ff79875a8975ac49a2681f5fe9
+---
+ drivers/video/backlight/qcom-wled.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/video/backlight/qcom-wled.c b/drivers/video/backlight/qcom-wled.c
+index 8054e47877..97f3bb7ade 100644
+--- a/drivers/video/backlight/qcom-wled.c
++++ b/drivers/video/backlight/qcom-wled.c
+@@ -197,6 +197,7 @@ struct wled {
+ 	bool disabled_by_short;
+ 	bool has_short_detect;
+ 	bool cabc_disabled;
++	bool ovp_irq_disabled;
+ 	int short_irq;
+ 	int ovp_irq;
+ 
+@@ -294,7 +295,10 @@ static void wled_ovp_work(struct work_struct *work)
+ {
+ 	struct wled *wled = container_of(work,
+ 					 struct wled, ovp_work.work);
+-	enable_irq(wled->ovp_irq);
++	if (wled->ovp_irq_disabled) {
++		enable_irq(wled->ovp_irq);
++		wled->ovp_irq_disabled = false;
++	}
+ }
+ 
+ static int wled_module_enable(struct wled *wled, int val)
+@@ -321,8 +325,11 @@ static int wled_module_enable(struct wled *wled, int val)
+ 			 */
+ 			schedule_delayed_work(&wled->ovp_work, HZ / 100);
+ 		} else {
+-			if (!cancel_delayed_work_sync(&wled->ovp_work))
++			if (!cancel_delayed_work_sync(&wled->ovp_work) && 
++					!wled->ovp_irq_disabled) {
+ 				disable_irq(wled->ovp_irq);
++				wled->ovp_irq_disabled = true;
++			}
+ 		}
+ 	}
+ 
+@@ -1765,6 +1772,7 @@ static void wled_remove(struct platform_device *pdev)
+ 	cancel_delayed_work_sync(&wled->ovp_work);
+ 	disable_irq(wled->short_irq);
+ 	disable_irq(wled->ovp_irq);
++	wled->ovp_irq_disabled = true;
+ }
+ 
+ static const struct of_device_id wled_match_table[] = {
+-- 
+2.56.0
+

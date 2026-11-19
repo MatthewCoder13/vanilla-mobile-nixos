@@ -1,0 +1,25 @@
+From d38382c923a5b1c1fdf528d4c01f97492c7df78e Mon Sep 17 00:00:00 2001
+From: Ali Nasrullayev <nesrullayev.ali@gmail.com>
+Date: Sat, 4 Apr 2026 14:26:29 +0400
+Subject: [PATCH 84/97] arch: arm64: dts: qcom: vayu: Remove hardcoded current
+ boost limit
+
+---
+ arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu.dts | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu.dts b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu.dts
+index 67215fa0c7..c444ddb49d 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu.dts
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu.dts
+@@ -615,7 +615,6 @@ led@1 {
+ &pm8150l_wled {
+ 	qcom,cabc;
+ 	qcom,cabc-sel = <1>;
+-	qcom,current-boost-limit = <875>;
+ 	qcom,current-limit-microamp = <22500>;
+ 	qcom,ovp-millivolt = <28000>;
+ 	qcom,num-strings = <3>;
+-- 
+2.56.0
+

@@ -1,0 +1,49 @@
+From a58a57c9ed8d58319b5be41969b127cebb28ac74 Mon Sep 17 00:00:00 2001
+From: Ali Nasrullayev <nesrullayev.ali@gmail.com>
+Date: Thu, 21 May 2026 01:25:22 +0400
+Subject: [PATCH 93/97] arch: arm64: dts: qcom: vayu: added missing default
+ pinctrl-0 in uart13 and remove local bd address
+
+---
+ .../boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi      | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+index 851b7386f3..f9f2827b68 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+@@ -942,7 +942,14 @@ sd-cd-pins {
+ 		};
+ 	};
+ 
+-	qup_uart13_sleep: qup-uart13-sleep {
++	qup_uart13_default: qup-uart13-default-state {
++		pins = "gpio43", "gpio44", "gpio45", "gpio46";
++		function = "qup13";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	qup_uart13_sleep: qup-uart13-sleep-state {
+ 		pinmux {
+ 			pins = "gpio43", "gpio44", "gpio45", "gpio46";
+ 			function = "gpio";
+@@ -1012,6 +1019,7 @@ &uart13 {
+ 	                      <&tlmm 46 IRQ_TYPE_EDGE_FALLING>;
+ 
+ 	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&qup_uart13_default>;
+ 	pinctrl-1 = <&qup_uart13_sleep>;
+ 
+ 	bluetooth: bluetooth {
+@@ -1022,7 +1030,6 @@ bluetooth: bluetooth {
+ 		vddch0-supply = <&vreg_l11c_3p3>;
+ 		max-speed = <3200000>;
+ 		firmware-name = "crnv21.bin", "crbtfw21.tlv";
+-		local-bd-address = [ cc eb 5e 09 10 2c ];
+ 	};
+ };
+ 
+-- 
+2.56.0
+

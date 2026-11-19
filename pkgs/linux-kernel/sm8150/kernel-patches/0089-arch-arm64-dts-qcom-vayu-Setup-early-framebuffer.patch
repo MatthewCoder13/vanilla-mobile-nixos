@@ -1,0 +1,43 @@
+From 02d4eb702b73de2adfbb6cdbe751098df519d915 Mon Sep 17 00:00:00 2001
+From: Ali Nasrullayev <nesrullayev.ali@gmail.com>
+Date: Mon, 4 May 2026 11:39:29 +0400
+Subject: [PATCH 89/97] arch: arm64: dts: qcom: vayu: Setup early framebuffer
+
+---
+ .../dts/qcom/sm8150-xiaomi-vayu-common.dtsi   | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+index ac7092ed19..df8b38fbdf 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+@@ -56,6 +56,26 @@ battery: battery {
+ 		voltage-max-design-microvolt = <4400000>;
+ 	};
+ 
++	chosen {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		stdout-path = "serial0:115200n8";
++		bootargs = "earlycon console=ttyMSM0,115200";
++
++		framebuffer: framebuffer@9c000000 {
++			compatible = "simple-framebuffer";
++			reg = <0 0x9c000000 0 (1080 * 2400 * 4)>;
++			width = <1080>;
++			height = <2400>;
++			stride = <(1080 * 4)>;
++			format = "a8r8g8b8";
++			display = <&display_panel>;
++			clocks = <&gcc GCC_DISP_HF_AXI_CLK>;
++		};
++	};
++
+ 	reserved-memory {
+ 		tz_mem: memory@86200000 {
+ 			reg = <0x0 0x86200000 0x0 0x5500000>;
+-- 
+2.56.0
+

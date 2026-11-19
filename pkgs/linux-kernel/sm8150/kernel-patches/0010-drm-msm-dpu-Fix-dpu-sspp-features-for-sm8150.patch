@@ -1,0 +1,10 @@
+From f3f431f7ba0777813152bec235adea98cdaf7ca6 Mon Sep 17 00:00:00 2001
+From: map220v <map220v300@gmail.com>
+Date: Thu, 4 Jan 2024 12:59:44 +0000
+Subject: [PATCH 10/97] drm/msm/dpu: Fix dpu sspp features for sm8150 Why was
+ it removed for sm8150 after duplication of sdm845_sspp that had it lol
+ https://github.com/torvalds/linux/commit/460c410f02e4f12d5200e6178f4b8bd1a18b7081
+
+-- 
+2.56.0
+

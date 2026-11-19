@@ -30,6 +30,25 @@ in
     uboot = ubootPackages.xiaomi-beryllium-tianma;
   };
 
+  xiaomi-vayu-tianma = buildTauchgangUBoot {
+    pname = "xiaomi-vayu-tianma";
+    dtb = "qcom/sm8150-xiaomi-vayu-tianma";
+    defconfig = "qcom_defconfig qcom-phone.config";
+    extraPatches = [ ./xiaomi-vayu-dts.patch ];
+  };
+  xiaomi-vayu-tianma-boot-image = mkAndroidBootImage {
+    uboot = ubootPackages.xiaomi-vayu-tianma;
+  };
+  xiaomi-vayu-huaxing = buildTauchgangUBoot {
+    pname = "xiaomi-vayu-huaxing";
+    dtb = "qcom/sm8150-xiaomi-vayu-huaxing";
+    defconfig = "qcom_defconfig qcom-phone.config";
+    extraPatches = [ ./xiaomi-vayu-dts.patch ];
+  };
+  xiaomi-vayu-huaxing-boot-image = mkAndroidBootImage {
+    uboot = ubootPackages.xiaomi-vayu-huaxing;
+  };
+
   samsung-a2corelte = buildTauchgangUBoot {
     pname = "samsung-a2corelte";
     dtb = "exynos/exynos7870-a2corelte";

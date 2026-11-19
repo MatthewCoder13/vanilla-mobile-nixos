@@ -1,0 +1,13 @@
+From 22de462ce3894255ef199ba076e8eba41beb974f Mon Sep 17 00:00:00 2001
+From: Marijn Suijten <marijn.suijten@somainline.org>
+Date: Mon, 19 Jun 2023 22:23:05 +0200
+Subject: [PATCH 01/97] drm/msm/dpu: Drop BIT(DPU_CTL_SPLIT_DISPLAY) from
+ active-CTL hardware
+
+This is now properly supported, and the bit is ignored on these
+platforms.
+
+Signed-off-by: Marijn Suijten <marijn.suijten@somainline.org>
+-- 
+2.56.0
+

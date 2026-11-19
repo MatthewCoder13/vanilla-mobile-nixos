@@ -1,0 +1,51 @@
+From 9779b6ed12d254e9414af2e2e76ed922a1510bcc Mon Sep 17 00:00:00 2001
+From: Elmo Todurov <elmo_git@todurov.eu>
+Date: Wed, 27 May 2026 06:49:08 +0000
+Subject: [PATCH 95/97] arm64: dts: qcom: sm8150-xiaomi-vayu: prefer USB-C sink
+ role
+
+Vayu is a phone, so describe the USB-C connector as dual-role with a
+sink preference instead of source-only.
+
+Use a 5 V / 3 A sink PDO because Xiaomi downstream sets Vayu
+PM8150B USB input current and PD bus current limits to 3 A. The
+10 W operating-power value follows the similar mainline Xiaomi nabu
+Type-C connector and is below the 15 W sink PDO.
+
+Sources:
+Xiaomi vayu-r-oss: https://github.com/MiCode/Xiaomi_Kernel_OpenSource
+  arch/arm64/boot/dts/qcom/vayu-sm8150.dtsi
+  branch vayu-r-oss, commit 0c9888aa2373
+Linux mainline: https://github.com/torvalds/linux
+  arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
+
+Signed-off-by: Elmo Todurov <elmo_git@todurov.eu>
+---
+ arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+index cae6be3b3d..ee0f877a6e 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+@@ -568,12 +568,17 @@ connector {
+ 		compatible = "usb-c-connector";
+ 
+ 		power-role = "dual";
++		try-power-role = "sink";
+ 		data-role = "dual";
+ 		self-powered;
+ 
+ 		source-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_DUAL_ROLE |
+ 			       PDO_FIXED_USB_COMM | PDO_FIXED_DATA_SWAP)>;
+ 
++		sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_DUAL_ROLE |
++			     PDO_FIXED_USB_COMM | PDO_FIXED_DATA_SWAP)>;
++		op-sink-microwatt = <10000000>;
++
+ 		ports {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+-- 
+2.56.0
+

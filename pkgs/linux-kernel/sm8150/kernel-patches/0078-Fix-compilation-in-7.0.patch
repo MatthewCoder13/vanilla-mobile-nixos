@@ -1,0 +1,24 @@
+From c5c7e09b8178933f930418321c9190243176bd2c Mon Sep 17 00:00:00 2001
+From: Pan Ortiz <panjeoc@proton.me>
+Date: Sun, 19 Apr 2026 11:16:58 -0500
+Subject: [PATCH 78/97] Fix compilation in 7.0
+
+---
+ drivers/input/touchscreen/fts_touch/fts.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/input/touchscreen/fts_touch/fts.c b/drivers/input/touchscreen/fts_touch/fts.c
+index 6a9e29b017..0c9f731323 100644
+--- a/drivers/input/touchscreen/fts_touch/fts.c
++++ b/drivers/input/touchscreen/fts_touch/fts.c
+@@ -33,6 +33,7 @@
+ 
+ #include <linux/init.h>
+ #include <linux/kernel.h>
++#include <linux/hex.h>
+ #include <linux/module.h>
+ #include <linux/string.h>
+ #include <linux/ctype.h>
+-- 
+2.56.0
+

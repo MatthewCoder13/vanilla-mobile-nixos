@@ -7,4 +7,5 @@ lib.concatMapAttrs
   })
   {
     linux_sdm845 = pkgs.callPackage ./sdm845 { };
+    linux_sm8150 = pkgs.callPackage ./sm8150 { };
   }

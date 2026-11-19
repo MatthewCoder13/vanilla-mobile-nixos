@@ -1,0 +1,27 @@
+From 9c982278828ef42fa3fc8e27ac6cd49d012cf933 Mon Sep 17 00:00:00 2001
+From: Nicola Guerrera <guerrera.nicola@gmail.com>
+Date: Thu, 30 Oct 2025 17:52:43 +0100
+Subject: [PATCH 71/97] dts: qcom: sm8150: xiaomi-nabu: remove wakeup-source
+ from lid gpio
+
+This fixes the tablet waking up when the lid is closed
+---
+ arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
+index dfebc7f3e7..b7845863ea 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
+@@ -198,7 +198,7 @@ event-hall-sensor {
+ 			linux,code = <SW_LID>;
+ 			debounce-interval = <15>;
+ 			linux,can-disable;
+-			wakeup-source;
++			// wakeup-source;
+ 		};
+ 	};
+ };
+-- 
+2.56.0
+

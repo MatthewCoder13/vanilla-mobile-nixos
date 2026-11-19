@@ -1,0 +1,25 @@
+From 3a28778995e658203a88749458872fc4e3fcd0b2 Mon Sep 17 00:00:00 2001
+From: Nicola Guerrera <guerrera.nicola@gmail.com>
+Date: Mon, 20 Oct 2025 20:51:36 +0200
+Subject: [PATCH 68/97] sm8150.config: enable CONFIG_SND_SEQUENCER
+
+udev will fail to load the alsa rules without this kernel module enabled.
+---
+ arch/arm64/configs/sm8150.config | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm64/configs/sm8150.config b/arch/arm64/configs/sm8150.config
+index aa0f51803a..db7298f834 100644
+--- a/arch/arm64/configs/sm8150.config
++++ b/arch/arm64/configs/sm8150.config
+@@ -242,6 +242,7 @@ CONFIG_NFT_REJECT=m
+ CONFIG_NF_TABLES_IPV4=y
+ CONFIG_NF_TABLES_IPV6=y
+ CONFIG_SND_USB_AUDIO=m
++CONFIG_SND_SEQUENCER=m
+ CONFIG_CIFS=y
+ 
+ CONFIG_DRM_GUD=m
+-- 
+2.56.0
+

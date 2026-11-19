@@ -1,0 +1,26 @@
+From 2d1620bf5304839106b62e31ca03d64f3bee04c9 Mon Sep 17 00:00:00 2001
+From: Ali Nasrullayev <nesrullayev.ali@gmail.com>
+Date: Wed, 27 May 2026 11:48:22 +0400
+Subject: [PATCH 94/97] arch: arm64: dts: qcom: vayu: enable type-c pd
+ passthrough
+
+---
+ arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+index f9f2827b68..cae6be3b3d 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-vayu-common.dtsi
+@@ -567,7 +567,7 @@ &pm8150b_typec {
+ 	connector {
+ 		compatible = "usb-c-connector";
+ 
+-		power-role = "source";
++		power-role = "dual";
+ 		data-role = "dual";
+ 		self-powered;
+ 
+-- 
+2.56.0
+

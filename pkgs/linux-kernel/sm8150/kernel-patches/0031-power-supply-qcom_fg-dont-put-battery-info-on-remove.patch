@@ -1,0 +1,29 @@
+From c13309e604f4072b4125ac8adc006fee329f196d Mon Sep 17 00:00:00 2001
+From: Casey Connolly <casey.connolly@linaro.org>
+Date: Fri, 20 Jun 2025 14:37:23 +0200
+Subject: [PATCH 31/97] power: supply: qcom_fg: dont put battery info on remove
+
+all the battery info data is devm tracked so it will be freed for us
+on removal.
+
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+---
+ drivers/power/supply/qcom_fg.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/power/supply/qcom_fg.c b/drivers/power/supply/qcom_fg.c
+index 271a0fc67..d3635ab90 100644
+--- a/drivers/power/supply/qcom_fg.c
++++ b/drivers/power/supply/qcom_fg.c
+@@ -1287,8 +1287,6 @@ static void qcom_fg_remove(struct platform_device *pdev)
+ {
+ 	struct qcom_fg_chip *chip = platform_get_drvdata(pdev);
+ 
+-	power_supply_put_battery_info(chip->chg_psy, chip->batt_info);
+-
+ 	if(chip->sram_wq)
+ 		destroy_workqueue(chip->sram_wq);
+ }
+-- 
+2.56.0
+

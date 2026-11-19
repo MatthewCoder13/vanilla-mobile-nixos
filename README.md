@@ -46,6 +46,8 @@ Implemented but untested:
   - OnePlus 6T (oneplus-fajita)
   - Samsung Galaxy S9 (samsung-starqltechn)
   - SHIFT SHIFT6mq (shift-axolotl)
+- [Xiaomi POCO X3 Pro (xiaomi-vayu)](docs/xiaomi-vayu.md)
+  - Tianma and Huaxing display variants.
 - Samsung Galaxy A2 Core U-Boot
 
 ## What software should I use?

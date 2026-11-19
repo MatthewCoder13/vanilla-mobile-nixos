@@ -1,0 +1,28 @@
+From 7fe2383c31ffd4293af2ca9a6de9a3559570ca9c Mon Sep 17 00:00:00 2001
+From: Ali Nasrullayev <nesrullayev.ali@gmail.com>
+Date: Tue, 12 May 2026 00:19:08 +0400
+Subject: [PATCH 92/97] sm8150.config: enable nt36672 drm and touchscreen
+ drivers for vayu
+
+---
+ arch/arm64/configs/sm8150.config | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/arch/arm64/configs/sm8150.config b/arch/arm64/configs/sm8150.config
+index 0914376244..ba75a6bac9 100644
+--- a/arch/arm64/configs/sm8150.config
++++ b/arch/arm64/configs/sm8150.config
+@@ -14,7 +14,10 @@ CONFIG_SND_SOC_CS35L41_I2C=m
+ CONFIG_CHARGER_IDTP9418=m
+ 
+ # Xiaomi POCO X3 Pro
++CONFIG_DRM_PANEL_HUAXING_NT36672=m
++CONFIG_DRM_PANEL_TIANMA_NT36672=m
+ CONFIG_SPI_XIAOMI_TP=y
++CONFIG_TOUCHSCREEN_NT36672_SPI=y
+ CONFIG_TOUCHSCREEN_NT36xxx_HOSTDL_SPI=y
+ CONFIG_TOUCHSCREEN_NVT_DEBUG_FS=y
+ CONFIG_TOUCHSCREEN_XIAOMI_TOUCHFEATURE=y
+-- 
+2.56.0
+

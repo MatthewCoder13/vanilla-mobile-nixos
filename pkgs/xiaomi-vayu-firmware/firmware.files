@@ -1,0 +1,16 @@
+./lib/firmware/ath10k/WCN3990/hw1.0/board-2.bin
+./lib/firmware/ath10k/WCN3990/hw1.0/firmware-5.bin
+./lib/firmware/novatek/j20s_novatek_ts_fw01.bin
+./lib/firmware/novatek/j20s_novatek_ts_fw02.bin
+./lib/firmware/qcom/sm8150/xiaomi/vayu/a640_zap.mbn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/adsp.mbn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/adspr.jsn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/adspua.jsn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/cdsp.mbn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/cdspr.jsn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/ipa_fws.mbn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/ipa_uc.mbn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/modem.mbn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/modemr.jsn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/modemuw.jsn
+./lib/firmware/qcom/sm8150/xiaomi/vayu/wlanmdsp.mbn

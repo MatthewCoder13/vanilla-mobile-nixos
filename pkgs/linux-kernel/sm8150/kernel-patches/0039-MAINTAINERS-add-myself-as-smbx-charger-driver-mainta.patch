@@ -1,0 +1,48 @@
+From 45f04b9899cd3b5957526c044a81d47d50936f8e Mon Sep 17 00:00:00 2001
+From: Casey Connolly <casey.connolly@linaro.org>
+Date: Thu, 19 Jun 2025 16:55:18 +0200
+Subject: [PATCH 39/97] MAINTAINERS: add myself as smbx charger driver
+ maintainer
+
+Missed when this originally went upstream, add myself to the MAINTAINERS
+file for this driver.
+
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+---
+ MAINTAINERS | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d1cc0e12f..27184512b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1,5 +1,4 @@
+ List of maintainers
+-===================
+ 
+ Descriptions of section entries and preferred order
+ ---------------------------------------------------
+@@ -21817,11 +21816,13 @@ F:	drivers/media/platform/qcom
+ F:	include/dt-bindings/media/*qcom*
+ 
+ QUALCOMM SMB CHARGER DRIVER
++QUALCOMM SMB2 CHARGER DRIVER
+ M:	Casey Connolly <casey.connolly@linaro.org>
+ L:	linux-arm-msm@vger.kernel.org
+ S:	Maintained
+ F:	Documentation/devicetree/bindings/power/supply/qcom,pmi8998-charger.yaml
+ F:	drivers/power/supply/qcom_smbx.c
++F:	drivers/power/supply/qcom_smbx_charger.c
+ 
+ QUALCOMM PPE DRIVER
+ M:	Luo Jie <quic_luoj@quicinc.com>
+@@ -29212,4 +29213,4 @@ L:	linux-kernel@vger.kernel.org
+ S:	Buried alive in reporters
+ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+ F:	*
+-F:	*/
++F:	*/
+\ No newline at end of file
+-- 
+2.56.0
+
